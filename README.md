@@ -9,7 +9,7 @@ This script allows you to establish a reverse PowerShell session with a target m
 3. Save the script as a PowerShell file (e.g. `reverse_powershell.ps1`).
 4. Start a listener on the machine with the IP address specified in step 1 using the command `ncat -lvp <port>` (e.g. `ncat -lvp 4442`).
 5. Run the script on the target machine by opening a PowerShell prompt and running `.\reverse_powershell.ps1`.
-6. The script will continuously attempt to establish a connection with the listener. Once a connection is established, the target machine will not be able to type commands. The script is designed to work correctly in Linux PowerShell (Debian 11).
+6. The script will continuously attempt to establish a connection with the listener. Once a connection is established, you able to type any commands. The script also designed to work correctly in Linux PowerShell (Debian 11).
 
 ## Commands
 
