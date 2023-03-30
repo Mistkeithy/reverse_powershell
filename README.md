@@ -19,6 +19,35 @@ The following commands can be used within the reverse PowerShell session:
 - `exit`: Closes the connection and terminates the script.
 - `upload <filename>`: Uploads a file to the target machine. The file must be in binary format and should be uploaded as a separate command after `upload <filename>`. The file will be saved in the same directory where the script is running. Example: `upload test.txt` followed by the binary data of the file.
 
+## Daemonizing in Linux
+
+To keep the reverse PowerShell script running in the background and automatically start on system boot, you can daemonize it in Linux. Here are the steps:
+
+1. Create a new file in the `/etc/systemd/system/` directory with a `.service` extension (e.g. `reverse_powershell.service`).
+2. Enter the following text into the file:
+
+```
+[Unit]
+Description=Reverse PowerShell script
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/pwsh -Command /path/to/reverse_powershell.ps1
+Restart=always
+RestartSec=18000
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Replace `/path/to/reverse_powershell.ps1` with the actual file path of the reverse PowerShell script.
+4. Save and close the file.
+5. Run the command `sudo systemctl daemon-reload` to reload the systemd manager configuration.
+6. Run the command `sudo systemctl start reverse_powershell.service` to start the service.
+7. Run the command `sudo systemctl enable reverse_powershell.service` to enable the service to automatically start on system boot.
+
+The reverse PowerShell script is now daemonized and will run in the background.
+
 ## Disclaimer
 
 The author of this script is not responsible for any actions taken by individuals who use this script for malicious purposes. This script is intended for educational and research purposes only. Use at your own risk.
